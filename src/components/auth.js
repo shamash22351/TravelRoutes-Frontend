@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./styleNew.css";
 
 
-export default class Ccomponent extends Component {
+export default class authorization extends Component {
     constructor(props){
         super(props);
         this.state = {
