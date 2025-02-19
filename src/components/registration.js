@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 
 const Registration = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    userName: '',
     mail: '',
-    birthdate: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
 
   const [error, setError] = useState(null);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -22,13 +21,18 @@ const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    if (!formData.firstName || !formData.mail || !formData.lastName || !formData.birthdate || !formData.password) {
+    if (!formData.userName || !formData.mail || !formData.password || !formData.confirmPassword) {
       setError("Пожалуйста, заполните все обязательные поля."); //Валидация
       return;
     }
 
+    if (formData.password !== formData.confirmPassword) {
+      setError("Пароли не совпадают");
+      return;
+    }
+
     try {
-      const response = await fetch('', { //Здесь можно будет сделать api, можно в другом файле
+      const response = await fetch('localhost/api/signup', { //Здесь можно будет сделать api, можно в другом файле
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -52,30 +56,19 @@ const Registration = () => {
       <h2>Регистрация</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="firstName">Имя:</label>
+          <label htmlFor="userName">Имя пользователя:</label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="lastName">Фамилия:</label>
-          <input 
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
+            id="userName"
+            name="userName"
+            value={formData.userName}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
           <label htmlFor="mail">Почта:</label>
-          <input 
+          <input
             type="text"
             id="mail"
             name="mail"
@@ -84,23 +77,23 @@ const Registration = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="birthdate">Дата рождения:</label>
-          <input 
-            type="date"
-            id="birthdate"
-            name="birthdate"
-            value={formData.birthdate}
+          <label htmlFor="password">Пароль:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Пароль:</label>
-          <input 
+          <label htmlFor="confirmPassword">Повторите пароль:</label>
+          <input
             type="password"
-            id="password"
-            name="password"
-            value={formData.password}
+            id="confirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
