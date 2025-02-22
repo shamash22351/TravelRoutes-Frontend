@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouteContext } from './RouteContext';
-
+import RouteCreator from './RouteCreator';
 const RouteForm = () => {
     const { addOrUpdateRoute } = useRouteContext();
     const [title, setTitle] = useState('');
@@ -21,32 +21,33 @@ const RouteForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <RouteCreator />
             <h2>{id ? 'Изменить маршрут' : 'Добавить маршрут'}</h2>
-            <input 
+            <input
                 type="text"
                 placeholder="ID маршрута (для редактирования)"
                 value={id}
                 onChange={(e) => setId(e.target.value)}
             />
-            <input 
-                type="text" 
-                placeholder="Название" 
-                value={title} 
-                onChange={(e) => setTitle(e.target.value)} 
-                required 
+            <input
+                type="text"
+                placeholder="Название"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
             />
-            <textarea 
-                placeholder="Описание" 
-                value={description} 
-                onChange={(e) => setDescription(e.target.value)} 
-                required 
+            <textarea
+                placeholder="Описание"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
             />
-            <input 
-                type="text" 
-                placeholder="URL изображения" 
-                value={imageUrl} 
-                onChange={(e) => setImageUrl(e.target.value)} 
-                required 
+            <input
+                type="text"
+                placeholder="URL изображения"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                required
             />
             <button type="submit">Сохранить</button>
         </form>

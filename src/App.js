@@ -1,14 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import RouteCreator from './components/RouteCreator';
-import RouteForm from './components/RouteForm';
 import RouteManager from './components/RouteManager';
+import RouteForm from './components/RouteForm';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
 
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -19,11 +19,12 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> */}
       </header>
       {/* <RouteCreator /> */}
       {/* <RouteForm /> */}
-      <RouteManager />
+      {/* <RouteManager /> */}
+      <RouteForm />
     </div>
   );
 }

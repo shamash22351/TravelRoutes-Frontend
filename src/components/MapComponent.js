@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 //Предварительно: npm install @react-google-maps/api
@@ -10,7 +10,7 @@ const containerStyle = {
 
 const center = {
   lat: 37.7749,
-  lng: -122.4194 
+  lng: -122.4194
 };
 
 const MapComponent = () => {
@@ -18,6 +18,7 @@ const MapComponent = () => {
 
   const fetchLocations = () => {
     const service = new window.google.maps.places.PlacesService(map);
+    // map - хде 
     const request = {
       location: center,
       radius: '500',
