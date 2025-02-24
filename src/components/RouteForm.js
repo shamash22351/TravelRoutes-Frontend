@@ -5,16 +5,29 @@ const RouteForm = () => {
     const { addOrUpdateRoute } = useRouteContext();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+    const [image, setImage] = useState('');
     const [id, setId] = useState('');
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImage(file);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (title && description && imageUrl) {
-            addOrUpdateRoute({ id, title, description, imageUrl });
+        if (title && description && image) {
+            const formData = new FormData();
+            formData.append("id", id);
+            formData.append("title", title);
+            formData.append("description", description);
+            formData.append("image", image);
+
+            addOrUpdateRoute(formData);
             setTitle('');
             setDescription('');
-            setImageUrl('');
+            setImage(null);
             setId('');
         }
     };
@@ -43,10 +56,9 @@ const RouteForm = () => {
                 required
             />
             <input
-                type="text"
-                placeholder="URL изображения"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
                 required
             />
             <button type="submit">Сохранить</button>
