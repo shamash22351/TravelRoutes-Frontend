@@ -1,0 +1,114 @@
+/* styleMainPage.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.navbar .navbar-brand img {
+    height: 40px;
+    /* Устанавливает размер логотипа */
+}
+
+.navbar .nav-link {
+    color: #007bff;
+}
+
+.navbar .nav-link:hover {
+    color: #0056b3;
+}
+
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+}
+
+.footer {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+input[type="text"] {
+    border: 1px solid #ced4da;
+    border-radius: 0.5rem;
+}
+
+.dropdown-content {
+    display: none;
+    /* Скрываем по умолчанию */
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    /* Показываем при наведении */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    /* Делаем ссылки блочными */
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.mapa-yandex {
+    border: 0;
+    /* Убираем рамку */
+}
+
+/* .my-4 {
+    margin: 0px;
+} */
+
+.container-fluid {
+    padding: 0px;
+    padding-top: 15px;
+}
+
+header {
+    background-color: white !important;
+}
+
+section {
+    background-color: lightgray !important;
+}
+
+.navbar {
+    padding: 0px !important;
+}
+
+.bg-white {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.container {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: none !important;
+    box-shadow: none !important;
+}
