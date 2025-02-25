@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styleMainPage.css';
 import MapComponent from "./MapComponent";
-import logo from '../assets/logo.jpg'
-import kab from '../assets/kab.png'
-
+import logo from "../assets/logo.jpg"
+import kab from "../assets/kab.png"
 const MainPage = () => {
     return (
         <div className="bg-light">
@@ -13,7 +12,7 @@ const MainPage = () => {
                 <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary">
                     <div className="container-fluid">
                         <Link className="navbar-brand" to="/">
-                            <img src="{logo}" alt="Логотип" />
+                            <img src={logo} alt="Логотип" />
                         </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -41,7 +40,7 @@ const MainPage = () => {
                             </div>
                             <div className="dropdown">
                                 <button className="menu-btn btn">
-                                    <img src="{kab}" alt="Меню" />
+                                    <img src={kab} alt="Меню" />
                                 </button>
                                 <div className="dropdown-content">
                                     <Link aria-current="page" to="/Profile">Профиль</Link>
