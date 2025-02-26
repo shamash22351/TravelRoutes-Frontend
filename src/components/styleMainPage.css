@@ -1,12 +1,25 @@
 /* styleMainPage.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: #30478C;
 }
 
 .navbar .navbar-brand img {
     height: 40px;
-    /* Устанавливает размер логотипа */
+}
+
+.navbar-brand {
+    margin-left: 10px;
+}
+
+
+.container-fluid {
+    background-color: #30478C;
+}
+
+.container-fluid-flu {
+    background-color: #8896BF;
+
 }
 
 .navbar .nav-link {
@@ -43,7 +56,6 @@ input[type="text"] {
 
 .dropdown-content {
     display: none;
-    /* Скрываем по умолчанию */
     position: absolute;
     background-color: white;
     min-width: 160px;
@@ -53,7 +65,6 @@ input[type="text"] {
 
 .dropdown:hover .dropdown-content {
     display: block;
-    /* Показываем при наведении */
 }
 
 .dropdown-content a {
@@ -61,7 +72,6 @@ input[type="text"] {
     padding: 10px 15px;
     text-decoration: none;
     display: block;
-    /* Делаем ссылки блочными */
 }
 
 .dropdown-content a:hover {
@@ -70,29 +80,34 @@ input[type="text"] {
 
 .mapa-yandex {
     border: 0;
-    /* Убираем рамку */
 }
 
-/* .my-4 {
-    margin: 0px;
-} */
+.my-4 {
+    margin: 0px !important;
+}
+
+.container-fluid,
+.container-fluid-flu {
+    padding: 0px;
+    padding-top: 10px;
+}
 
 .container-fluid {
-    padding: 0px;
-    padding-top: 15px;
-}
-
-header {
-    background-color: white !important;
+    padding-bottom: 10px;
 }
 
 section {
-    background-color: lightgray !important;
+    padding-bottom: 15px;
 }
 
 .navbar {
     padding: 0px !important;
 }
+
+.menu-imgg {
+    width: 50px;
+}
+
 
 .bg-white {
     padding: 0px !important;
@@ -102,6 +117,7 @@ section {
 .container {
     margin: 0px !important;
     padding: 0px !important;
+
 }
 
 footer {
@@ -109,6 +125,28 @@ footer {
     justify-content: center;
     align-items: center;
     text-align: center;
+    background-color: #30478C;
     border: none !important;
     box-shadow: none !important;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 0;
+}
+
+section {
+    padding-bottom: 15px;
+    margin: 0;
+    background-color: #30478C;
+}
+
+.bg-white {
+    padding: 0px !important;
+    margin: 0px !important;
+    background-color: #30478C;
+}
+
+.container {
+    width: 100%;
+    margin: 0px;
+    background-color: #30478C;
 }

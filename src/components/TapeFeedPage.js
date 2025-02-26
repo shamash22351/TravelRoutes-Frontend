@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styleMainPage.css';
-
+import logo from "../assets/logo.jpg"
+import kab from "../assets/kab.png"
+import heart from "../assets/heart.svg"
+import komm from "../assets/chat-square.svg"
 const TapeFeedPage = () => {
     return (
         <div className="bg-light">
@@ -10,7 +13,7 @@ const TapeFeedPage = () => {
                 <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary">
                     <div className="container-fluid">
                         <Link className="navbar-brand" to="/">
-                            <img src="../assets/logo2.png" alt="Логотип" />
+                            <img src={logo} alt="Логотип" />
                         </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -38,7 +41,7 @@ const TapeFeedPage = () => {
                             </div>
                             <div className="dropdown">
                                 <button className="menu-btn btn">
-                                    <img src="../assets/kab.png" alt="Меню" />
+                                    <img src={kab} alt="Меню" className='menu-imgg' />
                                 </button>
                                 <div className="dropdown-content">
                                     <Link aria-current="page" to="/Profile">Профиль</Link>
@@ -50,9 +53,9 @@ const TapeFeedPage = () => {
                 </nav>
             </header>
             <section className="my-4">
-                <div className="container-fluid">
+                <div className="container-fluid-flu">
                     <div className="row justify-content-center">
-                        <div className="col-lg-6 col-md-8 col-sm-10 mx-auto">  {/* Сделано уже, ширина теперь 6 на больших экранах, 8 на средних, 10 на малых */}
+                        <div className="col-lg-6 col-md-8 col-sm-10 mx-auto">  {/* Контейнер с меньшей шириной */}
                             <div className="card shadow-sm mb-4">
                                 <Link to="/route">
                                     <div style={{ position: 'relative', overflow: 'hidden' }}>
@@ -74,23 +77,12 @@ const TapeFeedPage = () => {
                                     </p>
                                     <div className="d-flex align-items-center justify-content-start">
                                         <button className="heart border-0 bg-transparent d-flex align-items-center me-2" style={{ cursor: 'pointer' }}>
-                                            <img id="heart-id" src="../assets/heart.svg" alt="Сердце" />
+                                            <img id="heart-id" src={heart} alt="Сердце" />
                                         </button>
                                         <Link to="/comm">
-                                            <img src="../assets/chat-square.svg" alt="Комментарии" width="20" height="20" />
+                                            <img src={komm} alt="Комментарии" width="20" height="20" />
                                         </Link>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="card shadow-sm mb-4">
-                                <Link to="/route">
-                                    <img src="../assets/firstPost.jpg" className="card-img-top" alt="Post" />
-                                </Link>
-                                <div className="card-body">
-                                    <h5 className="card-title">ТЕМА</h5>
-                                    <p className="card-text">
-                                        ААААААААААААААААААААААААААААААААААА...
-                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -40,7 +40,7 @@ const MainPage = () => {
                             </div>
                             <div className="dropdown">
                                 <button className="menu-btn btn">
-                                    <img src={kab} alt="Меню" />
+                                    <img src={kab} alt="Меню" className='menu-imgg' />
                                 </button>
                                 <div className="dropdown-content">
                                     <Link aria-current="page" to="/Profile">Профиль</Link>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styleMainPage.css';
+
 const Authorization = () => {
     const [formData, setFormData] = useState({
         mail: '',
@@ -47,12 +48,12 @@ const Authorization = () => {
     };
 
     return (
-        <div className="container d-flex justify-content-center align-items-center vh-100">
-            <div className="login-container border rounded p-4 shadow-lg bg-light">
-                <h2 className="text-center mb-4">Авторизация</h2>
+        <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+            <div className="login-container border rounded p-4 shadow-lg" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#30478C' }}>
+                <h2 className="text-center mb-4 text-white">Авторизация</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group mb-3">
-                        <label htmlFor="mail">Почта:</label>
+                        <label htmlFor="mail" className="text-white">Почта:</label>
                         <input
                             type="text"
                             id="mail"
@@ -64,7 +65,7 @@ const Authorization = () => {
                         />
                     </div>
                     <div className="form-group mb-3">
-                        <label htmlFor="password">Пароль:</label>
+                        <label htmlFor="password" className="text-white">Пароль:</label>
                         <input
                             type="password"
                             id="password"
@@ -77,8 +78,8 @@ const Authorization = () => {
                     </div>
                     {error && <p className="text-danger">{error}</p>}
                     <div className="button-container d-flex justify-content-between">
-                        <button type="submit" className="btn btn-primary">Авторизоваться</button>
-                        <Link to="/signup" className="btn btn-link">Регистрация</Link>
+                        <button type="submit" className="btn btn-light">Авторизоваться</button>
+                        <Link to="/signup" className="btn btn-link text-white">Регистрация</Link>
                     </div>
                 </form>
             </div>
