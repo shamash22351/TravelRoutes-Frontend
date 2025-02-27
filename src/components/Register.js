@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Импортируем хук для перенаправления
+import { ToastContainer, toast } from 'react-toastify'; // Импортируем необходимые элементы для уведомлений
+import 'react-toastify/dist/ReactToastify.css'; // Импортируем стили для уведомлений
 import './styleMainPage.css';
-
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    lastName: '',
-    middleName: '',
-    birthdate: '',
-    password: ''
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   });
 
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,6 +22,11 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert('Пароли не совпадают!');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:8000/api/signup/', {
         method: 'POST',
@@ -27,10 +34,8 @@ const Register = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name,
-          lastName: formData.lastName,
-          middleName: formData.middleName,
-          birthdate: formData.birthdate,
+          username: formData.name,
+          email: formData.email,
           password: formData.password
         }),
       });
@@ -38,70 +43,51 @@ const Register = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Успех:', data);
-        // Перенаправление или дальнейшие действия могут быть выполнены здесь
+        toast.success('Вы успешно зарегистрированы!');
+        navigate('/routes');
       } else {
         const errorData = await response.json();
         console.error('Ошибка:', errorData);
+        toast.error('Ошибка регистрации, попробуйте снова.');
       }
     } catch (error) {
       console.error('Ошибка сети:', error);
+      toast.error('Ошибка сети, попробуйте снова позже.');
     }
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="register-container border rounded p-4 shadow-lg" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#30478C' }}>
-        <h2 className="text-center mb-4 text-white">Регистрация</h2> {/* Белый текст заголовка */}
+    <div className="body-container">
+      <ToastContainer /> { }
+      <div className="register-container">
+        <h2>Регистрация</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group mb-3">
-            <label htmlFor="name" className="text-white">Имя:</label>
+          <div className="form-group">
+            <label htmlFor="name">Имя:</label>
             <input
               type="text"
-              id="name"
-              name="name"
+              id="username"
+              name="username"
               value={formData.name}
               onChange={handleChange}
               required
-              className="form-control"
+              className="input-field"
             />
           </div>
-          <div className="form-group mb-3">
-            <label htmlFor="lastName" className="text-white">Фамилия:</label>
+          <div className="form-group">
+            <label htmlFor="email">Электронная почта:</label>
             <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
               required
-              className="form-control"
+              className="input-field"
             />
           </div>
-          <div className="form-group mb-3">
-            <label htmlFor="middleName" className="text-white">Отчество:</label>
-            <input
-              type="text"
-              id="middleName"
-              name="middleName"
-              value={formData.middleName}
-              onChange={handleChange}
-              className="form-control"
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="birthdate" className="text-white">Дата рождения:</label>
-            <input
-              type="date"
-              id="birthdate"
-              name="birthdate"
-              value={formData.birthdate}
-              onChange={handleChange}
-              required
-              className="form-control"
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="password" className="text-white">Пароль:</label>
+          <div className="form-group">
+            <label htmlFor="password">Пароль:</label>
             <input
               type="password"
               id="password"
@@ -109,10 +95,22 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="form-control"
+              className="input-field"
             />
           </div>
-          <button type="submit" className="btn btn-light w-100">Зарегистрироваться</button> {/* Белая кнопка */}
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Повторите пароль:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              className="input-field"
+            />
+          </div>
+          <button type="submit">Зарегистрироваться</button>
         </form>
       </div>
     </div>

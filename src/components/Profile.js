@@ -1,51 +1,69 @@
-// src/components/Profile.js
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Profile = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert(`Имя: ${firstName}, Фамилия: ${lastName}, Email: ${email}`);
-    };
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error("Токен отсутствует. Пожалуйста, выполните вход.");
+                }
+
+                const response = await fetch('http://localhost:8000/api/user/', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+
+                if (!response.ok) {
+                    const errorMessage = await response.text(); // Получение текстовой информации об ошибке
+                    throw new Error(`Ошибка ${response.status}: ${errorMessage}`);
+                }
+
+                const data = await response.json();
+                setUser(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    if (loading) {
+        return <div>Загрузка...</div>;
+    }
+
+    if (error) {
+        return <div className="text-danger">{error}</div>;
+    }
 
     return (
         <div className="container">
             <h1>Профиль пользователя</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="firstName" className="form-label">Имя</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        id="firstName" 
-                        value={firstName} 
-                        onChange={(e) => setFirstName(e.target.value)} 
+            {user && (
+                <div className="profile-info">
+                    <img
+                        src={user.avatar || 'URL_К_УМОЛЧАНИЮ_АВАТАРКИ'}
+                        alt="Аватарка"
+                        className="img-fluid rounded-circle mb-3"
+                        width="100"
+                        height="100"
                     />
+                    <h2>{user.firstName} {user.lastName}</h2>
+                    <p>Email: {user.email}</p>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="lastName" className="form-label">Фамилия</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        id="lastName" 
-                        value={lastName} 
-                        onChange={(e) => setLastName(e.target.value)} 
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input 
-                        type="email" 
-                        className="form-control" 
-                        id="email" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
-                    />
-                </div>
+            )}
+            <form onSubmit={(e) => { }}>
+                { }
                 <button type="submit" className="btn btn-primary">Сохранить изменения</button>
             </form>
         </div>

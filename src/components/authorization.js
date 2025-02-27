@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styleMainPage.css';
+import "./styleMainPage.css"
 
 const Authorization = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ const Authorization = () => {
     });
 
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -33,7 +34,10 @@ const Authorization = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    identifier: formData.mail,
+                    password: formData.password
+                })
             });
 
             if (!response.ok) {
@@ -41,6 +45,7 @@ const Authorization = () => {
                 throw new Error(errorData.error || "Ошибка при авторизации. Попробуйте еще раз.");
             }
             alert('Авторизация успешна!');
+            navigate('/routes');
 
         } catch (error) {
             setError(error.message);
@@ -48,40 +53,42 @@ const Authorization = () => {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-            <div className="login-container border rounded p-4 shadow-lg" style={{ maxWidth: '400px', width: '100%', backgroundColor: '#30478C' }}>
-                <h2 className="text-center mb-4 text-white">Авторизация</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group mb-3">
-                        <label htmlFor="mail" className="text-white">Почта:</label>
-                        <input
-                            type="text"
-                            id="mail"
-                            name="mail"
-                            value={formData.mail}
-                            onChange={handleChange}
-                            required
-                            className="form-control"
-                        />
-                    </div>
-                    <div className="form-group mb-3">
-                        <label htmlFor="password" className="text-white">Пароль:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            className="form-control"
-                        />
-                    </div>
-                    {error && <p className="text-danger">{error}</p>}
-                    <div className="button-container d-flex justify-content-between">
-                        <button type="submit" className="btn btn-light">Авторизоваться</button>
-                        <Link to="/signup" className="btn btn-link text-white">Регистрация</Link>
-                    </div>
-                </form>
+        <div className="body-container">
+            <div className="container d-flex justify-content-center align-items-center vh-100">
+                <div className="login-container border rounded p-4 shadow-lg bg-light">
+                    <h2 className="text-center mb-4">Авторизация</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group mb-3">
+                            <label htmlFor="mail">Почта:</label>
+                            <input
+                                type="text"
+                                id="mail"
+                                name="mail"
+                                value={formData.mail}
+                                onChange={handleChange}
+                                required
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="form-group mb-3">
+                            <label htmlFor="password">Пароль:</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                                className="form-control"
+                            />
+                        </div>
+                        {error && <p className="text-danger">{error}</p>}
+                        <div className="button-container d-flex justify-content-between">
+                            <button type="submit" className="btn btn-primary">Авторизоваться</button>
+                            <Link to="/signup" className="btn btn-link">Регистрация</Link>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );

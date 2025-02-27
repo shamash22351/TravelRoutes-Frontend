@@ -1,68 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+// src/components/MapComponent.js
+import React, { useEffect, useRef, useState } from 'react';
 
-// Make sure to install the package: npm install @react-google-maps/api
+const MapComponent = ({ onLocationSelect }) => {
+    const mapContainerRef = useRef(null);
+    const mapInstanceRef = useRef(null);
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
 
-const containerStyle = {
-    width: '100%',
-    height: '400px'
-};
+    useEffect(() => {
+        if (!mapInstanceRef.current) {
+            mapInstanceRef.current = new window.ymaps.Map(mapContainerRef.current, {
+                center: [55.76, 37.64],
+                zoom: 10,
+            });
 
-const center = {
-    lat: 37.7749,
-    lng: -122.4194
-};
+            mapInstanceRef.current.events.add('click', (e) => {
+                const coords = e.get('coords');
+                setLatitude(coords[0]);
+                setLongitude(coords[1]);
 
-const MapComponent = () => {
-    const [locations, setLocations] = useState([]);
-    const [map, setMap] = useState(null); // State to hold the map instance
-
-    // Function to fetch locations
-    const fetchLocations = () => {
-        if (map && window.google) { // Check if map and google are defined
-            const service = new window.google.maps.places.PlacesService(map);
-            const request = {
-                location: center,
-                radius: '500',
-                type: ['restaurant'], // Specify type if necessary
-            };
-
-            service.nearbySearch(request, (results, status) => {
-                if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                    setLocations(results);
-                }
+                onLocationSelect(coords[0], coords[1]);
             });
         }
-    };
 
-    // useEffect to run fetchLocations when the map is loaded
-    useEffect(() => {
-        if (map) {
-            fetchLocations(); // Call fetchLocations only if map is defined
-        }
-    }, [map]); // Dependency array includes map
-
-    // onLoad function to grab the map instance
-    const onLoad = (mapInstance) => {
-        setMap(mapInstance);
-    };
+        return () => {
+            if (mapInstanceRef.current) {
+                mapInstanceRef.current.destroy();
+                mapInstanceRef.current = null;
+            }
+        };
+    }, [onLocationSelect]);
 
     return (
-        <LoadScript googleMapsApiKey="your_api_key_here" libraries={['places']}> {/* Make sure to include the 'places' library */}
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={14}
-                onLoad={onLoad} // Capture map instance on load
-            >
-                {locations.map((location, index) => (
-                    <Marker
-                        key={index}
-                        position={{ lat: location.geometry.location.lat(), lng: location.geometry.location.lng() }}
-                    />
-                ))}
-            </GoogleMap>
-        </LoadScript>
+        <div>
+            <div style={{ width: '100%', height: '400px' }} ref={mapContainerRef} />
+
+        </div>
     );
 };
 
