@@ -1,10 +1,56 @@
 /* Общие стили */
 .body-class {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #B6C5F2;
     margin: 0;
     padding: 0;
 }
+
+.login-container {
+    background-color: #30478C !important;
+    color: white;
+}
+
+.login-container .form-control {
+    background-color: white;
+    color: black;
+}
+
+.login-container label {
+    color: white;
+}
+
+.login-container .btn-primary {
+    background-color: white;
+    color: #30478C;
+    border: 1px solid white;
+}
+
+.body-container {
+    background-color: white;
+}
+
+.login-container .btn-primary:hover {
+    background-color: #ffffffd0;
+    color: #30478C;
+}
+
+
+.login-container .btn-link {
+    color: white;
+}
+
+.login-container .btn-primary {
+    background-color: #BF754B;
+    color: white;
+    border: 1px solid #BF754B;
+}
+
+.login-container .btn-primary:hover {
+    background-color: #bb7f3a;
+    color: white;
+}
+
 
 .header-class {
     background-color: #007bff;
@@ -16,6 +62,80 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 1rem;
+}
+
+.body-cont {
+    background-color: white;
+    /* Белый фон за всей формой */
+    height: 100vh;
+    /* Растягиваем на весь экран */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    background-color: #30478C;
+    /* Синий фон самой формы */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+}
+
+.registr-but {
+    background-color: #BF754B;
+}
+
+.registr-but:hover {
+    background-color: #A5643A;
+    /* Чуть темнее при наведении */
+}
+
+.register-container {
+    color: white;
+    /* Делаем весь текст внутри белым */
+}
+
+.register-container h2,
+.register-container label,
+.register-container p {
+    color: white;
+    /* Заголовки, лейблы и сообщения — белые */
+}
+
+.container {
+    color: white;
+    /* Делаем весь текст внутри контейнера белым */
+}
+
+.container h2,
+.container label,
+.container h5 {
+    color: black;
+    /* Заголовки, лейблы и подзаголовки белые */
+}
+
+.container ul {
+    color: white;
+    /* Текст списка тоже белый */
+}
+
+.form-control {
+    color: black;
+    /* Текст в инпутах остаётся черным */
+    background-color: white;
+    /* Фон инпутов белый */
+}
+
+.form-control::placeholder {
+    color: gray;
+    /* Цвет placeholder */
+}
+
+.btn {
+    color: white;
+    /* Текст кнопок белый */
 }
 
 /* Стили для карточки маршрута */
@@ -123,14 +243,17 @@
 }
 
 /* Футер */
+.bg-white {
+    background-color: #30478C !important;
+}
+
 footer {
-    background-color: #fff;
-    color: #666;
+    color: white;
     text-align: center;
     font-size: 0.9rem;
     padding: 1rem 0;
     margin-top: 2rem;
-    border-top: 1px solid #ddd;
+    border-top: 0px solid #ddd;
 }
 
 footer p {

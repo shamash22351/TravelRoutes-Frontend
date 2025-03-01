@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/logo.jpg';
+import './styleNavBar.css';
 
 const NavBar = () => {
     const { userId } = useUser(); // Получаем userId из контекста
@@ -11,7 +12,7 @@ const NavBar = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            <img src={logo} alt="Логотип" width="30" height="30" className="d-inline-block align-text-top" />
+            <img src={logo} alt="Логотип" width="40" height="40" className="d-inline-block align-text-top" />
           </Link>
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav me-auto">
@@ -19,7 +20,7 @@ const NavBar = () => {
                 <Link className="nav-link" to="/">Главная</Link>
               </li>
               <li className="nav-item">
-                 <Link className="nav-link" to="/routes">Маршруты</Link>
+                <Link className="nav-link" to="/routes">Маршруты</Link>
               </li>
               {userId && ( 
                 <>

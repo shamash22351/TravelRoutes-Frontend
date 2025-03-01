@@ -7,10 +7,9 @@ const CommentSection = ({ routeId }) => {
     const [rating, setRating] = useState(0);
     const [error, setError] = useState('');
 
-    // Загрузка отзывов для конкретного маршрута
     const fetchReviews = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/routes/${routeId}/reviews/`);
+            const response = await fetch(`http://localhost/api/routes/${routeId}/reviews/`);
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.detail || 'Не удалось загрузить отзывы');

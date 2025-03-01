@@ -9,8 +9,6 @@ const TapeFeedPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { id, title, description, images, points, is_private } = location.state || {};
-    const [likes, setLikes] = useState({}); 
-    const [userLikes, setUserLikes] = useState({}); 
     const [routes, setRoutes] = useState([]);
     const [selectedRouteId, setSelectedRouteId] = useState(null);
     
@@ -30,52 +28,6 @@ const TapeFeedPage = () => {
 
     useEffect(() => {
         console.log('Routes updated:', routes); 
-    }, [routes]);
-
-
-    const handleLike = async (routeId) => {
-        try {
-            const response = await fetch(`http://localhost:8000/api/routes/${routeId}/like/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`, 
-                },
-            });
-            if (!response.ok) throw new Error('Ошибка при обработке лайка');
-            const data = await response.json();
-    
-            const updatedLikes = { ...likes };
-            const updatedUserLikes = { ...userLikes };
-    
-            if (data.message === "Лайк добавлен") {
-                updatedLikes[routeId] = (updatedLikes[routeId] || 0) + 1;
-                updatedUserLikes[routeId] = true;
-            } else if (data.message === "Лайк удален") {
-                updatedLikes[routeId] = (updatedLikes[routeId] || 1) - 1;
-                updatedUserLikes[routeId] = false;
-            }
-    
-            setLikes(updatedLikes);
-            setUserLikes(updatedUserLikes);
-        } catch (error) {
-            console.error('Ошибка:', error);
-        }
-    };
-
-    const fetchLikes = async (routeId) => {
-        try {
-            const response = await fetch(`http://localhost:8000/api/routes/${routeId}/like/`);
-            if (!response.ok) throw new Error('Не удалось загрузить лайки');
-            const data = await response.json();
-            setLikes((prevLikes) => ({ ...prevLikes, [routeId]: data.likes_count }));
-        } catch (error) {
-            console.error('Ошибка:', error);
-        }
-    };
-    
-    useEffect(() => {
-        routes.forEach((route) => fetchLikes(route.id));
     }, [routes]);
 
     const renderRouteCard = (route, isCreated = false) => (
@@ -140,12 +92,6 @@ const TapeFeedPage = () => {
                         {route.is_private ? 'Приватный' : 'Публичный'}
                     </span>
                     <div>
-                        <button 
-                            className={`btn ${userLikes[route.id] ? 'btn-danger' : 'btn-outline-danger'} me-2`}
-                            onClick={() => handleLike(route.id)}
-                        >
-                            ❤️ {likes[route.id] || 0}
-                        </button>
                         <button 
                             className="btn btn-primary"
                             onClick={() => setSelectedRouteId(route.id)}

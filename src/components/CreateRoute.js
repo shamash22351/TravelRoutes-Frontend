@@ -5,6 +5,7 @@ import LocationModal from './LocationModal';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import NavBar from './NavBar'; 
+import './styleMainPage.css';
 
 const CreateRoute = () => {
     const [title, setTitle] = useState(''); 

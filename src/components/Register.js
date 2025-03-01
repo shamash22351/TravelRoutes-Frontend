@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../style/style.css';
 import { useUser } from '../context/UserContext';  
+import './styleMainPage.css';
 
 const Register = () => {
   const { setUserId } = useUser(); 
@@ -63,7 +64,7 @@ const Register = () => {
   };
 
   return (
-    <div className="body-cont">
+    <div className="body-container">
       <ToastContainer />
       <div className="register-container">
         <h2>Регистрация</h2>

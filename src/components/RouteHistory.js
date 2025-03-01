@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const RouteHistory = ({ routeId }) => {
+const RouteHistory = ({ user_id }) => {
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -8,7 +8,7 @@ const RouteHistory = ({ routeId }) => {
     useEffect(() => {
         const fetchHistory = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/routes/${routeId}/history/`);
+                const response = await fetch(`http://localhost:8000/api/history_routes/${user_id}/`);
                 if (!response.ok) throw new Error('Не удалось загрузить историю изменений');
                 const data = await response.json();
                 setHistory(data);
@@ -20,7 +20,7 @@ const RouteHistory = ({ routeId }) => {
         };
 
         fetchHistory();
-    }, [routeId]);
+    }, [user_id]);
 
     if (loading) return <div>Загрузка истории изменений...</div>;
     if (error) return <div className="text-danger">{error}</div>;
