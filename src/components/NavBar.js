@@ -18,11 +18,11 @@ const NavBar = () => {
               <li className="nav-item">
                 <Link className="nav-link" to="/">Главная</Link>
               </li>
+              <li className="nav-item">
+                 <Link className="nav-link" to="/routes">Маршруты</Link>
+              </li>
               {userId && ( 
                 <>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/routes">Маршруты</Link>
-                  </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/create">Создать маршрут</Link>
                   </li>
